@@ -1,11 +1,11 @@
-# Aexe CLI
+# Acquary CLI
 
 ## Installation
 
 To install, just run the command below:
 
 ```bash
-npm install -g @aexe/cli
+npm install -g @acquary/cli
 ```
 
 ## Usage
@@ -18,10 +18,10 @@ a `.cache.json` file for caching MFA tokens.
 You can configure multiple ENVs, and switch between them using the `--env` flag.
 
 ```bash
-aexe configure --add prod
+acquary configure --add prod
 ```
 
-This will create a `prod` folder in the `<HOME>/.aexe` folder, and you should edit the `config.json` file to add your configuration.\
+This will create a `prod` folder in the `<HOME>/.acquary` folder, and you should edit the `config.json` file to add your configuration.\
 For `azure_server` section, see more information [here](https://tediousjs.github.io/tedious/api-connection.html).\
 For `azure_authentication`, you only need to edit the `authority`. The `clientId` and `clientSecret` are from Azure Data Studio hehe.
 
@@ -39,12 +39,12 @@ You need to generate a `clients.json` file to use the CLI. This is a file that c
 databases you want to connect to or a SQL Query to get the databases.
 
 ```bash
-aexe generate clients clients.json
+acquary generate clients clients.json
 ```
 
 #### Arguments
 ```bash
-aexe generate <type> <file>
+acquary generate <type> <file>
 ```
 Where `type` can be `clients`or `script`
 
@@ -53,7 +53,7 @@ Where `type` can be `clients`or `script`
 After create a _ENV_ and generate a file with the `databases` configuration, you can execute a script against all the databases.
 
 ```bash
-aexe execute --env prod --clients clients.json --query "SELECT * FROM SomeTable"
+acquary execute --env prod --clients clients.json --query "SELECT * FROM SomeTable"
 ```
 
 #### Parameters
@@ -85,7 +85,7 @@ With the `--output stdout` flag, you can pipe all databases outputs to another c
 For example, you can pipe the output to `jq` to filter the result.
 
 ```bash
-aexe execute --env prod --clients clients.json --query "SELECT * FROM SomeTable" --output stdout | jq '.[] | select(.SomeColumn == "SomeValue")'
+acquary execute --env prod --clients clients.json --query "SELECT * FROM SomeTable" --output stdout | jq '.[] | select(.SomeColumn == "SomeValue")'
 ```
 
 Or to `python`
