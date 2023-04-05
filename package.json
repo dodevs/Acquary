@@ -2,7 +2,9 @@
   "name": "acquary",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "private": false,
   "dependencies": {
     "@azure/msal-node": "^1.17.0",
@@ -17,6 +19,8 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
     "@nrwl/esbuild": "^15.9.2",
     "@nrwl/eslint-plugin-nx": "15.9.2",
     "@nrwl/js": "15.9.2",
@@ -26,6 +30,7 @@
     "@nrwl/workspace": "15.9.2",
     "@swc/cli": "~0.1.55",
     "@swc/core": "^1.2.173",
+    "@theunderscorer/nx-semantic-release": "^2.2.1",
     "@types/cli-progress": "^3.11.0",
     "@types/mssql": "^8.1.2",
     "@types/node": "^18.15.11",
@@ -36,6 +41,7 @@
     "esbuild": "^0.17.15",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
+    "husky": "^8.0.0",
     "jsdom": "~20.0.3",
     "nx": "15.9.2",
     "prettier": "^2.6.2",

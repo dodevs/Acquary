@@ -2,7 +2,8 @@
   "name": "@acquary/cli",
   "version": "0.0.1",
   "type": "commonjs",
-  "description": "@Acquary/cli is a tool to use @Acquary/core from the command line",
+  "description": "@acquary/cli is a tool to use @acquary/core from the command line",
+  "private": false,
   "bin": {
     "acquary": "./src/bin/cli.js"
   },

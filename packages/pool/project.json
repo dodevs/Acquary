@@ -35,6 +35,13 @@
         "passWithNoTests": true,
         "reportsDirectory": "../../coverage/packages/pool"
       }
+    },
+    "semantic-release": {
+      "executor": "@theunderscorer/nx-semantic-release:semantic-release",
+      "options": {
+        "buildTarget": "${PROJECT_NAME}:build",
+        "outputPath": "dist/packages/${PROJECT_NAME}"
+      }
     }
   },
   "tags": []

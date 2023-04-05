@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "type": "commonjs",
   "description": "@Acquary/pool is the pool manager for @Acquary/core",
+  "private": false,
   "author": {
     "name": "Douglas Sousa",
     "email": "douglass.sousa@outlook.com.br"
