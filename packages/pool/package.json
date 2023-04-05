@@ -1,6 +1,6 @@
 {
   "name": "@acquary/pool",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "commonjs",
   "description": "@Acquary/pool is the pool manager for @Acquary/core",
   "private": false,
