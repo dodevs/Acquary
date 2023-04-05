@@ -14,7 +14,7 @@
     "node-sql-parser": "^4.6.6",
     "opener": "^1.5.2",
     "tslib": "^2.5.0",
-    "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.2/xlsx-0.19.2.tgz"
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@nrwl/esbuild": "^15.9.2",

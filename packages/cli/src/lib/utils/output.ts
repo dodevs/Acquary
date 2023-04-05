@@ -42,7 +42,6 @@ const Xls = {
     Object.keys(workbookClients).forEach(client => {
       utils.book_append_sheet(workbook, workbookClients[client], client);
     });
-    XLSX.set_fs(fs);
     XLSX.writeFile(workbook, Path.resolve(process.cwd(), 'result.xlsx'));
   }
 }
