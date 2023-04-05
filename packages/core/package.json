@@ -1,0 +1,20 @@
+{
+  "name": "@acquary/core",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "description": "@Acquary/core is a lib for execute a query on multiple Azure Databases",
+  "author": {
+    "name": "Douglas Sousa",
+    "email": "douglass.sousa@outlook.com.br"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dodevs/Acquary"
+  }
+}

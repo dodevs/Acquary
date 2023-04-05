@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@acquary/cli": ["packages/cli/src/index.ts"],
+      "@acquary/core": ["packages/core/src/index.ts"],
+      "@acquary/pool": ["packages/pool/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

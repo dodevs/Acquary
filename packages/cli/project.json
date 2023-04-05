@@ -1,0 +1,60 @@
+{
+  "name": "cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/cli/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/cli",
+        "main": "packages/cli/src/index.ts",
+        "tsConfig": "packages/cli/tsconfig.lib.json",
+        "assets": ["packages/cli/*.md"]
+      }
+    },
+    "debug": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "packages/cli",
+        "envFile": "packages/cli/.env",
+        "command": "node --inspect-brk --loader ts-node/esm -r tsconfig-paths/register src/bin/cli.ts"
+      }
+    },
+    "bundle": {
+      "executor": "@nrwl/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/bundles/cli",
+        "format": ["cjs"],
+        "main": "packages/cli/src/bin/cli.ts",
+        "tsConfig": "packages/cli/tsconfig.bundle.json",
+        "assets": ["packages/cli/*.md"]
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs cli {args.ver} {args.tag}"
+      },
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/cli/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": ["coverage/packages/cli"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/packages/cli"
+      }
+    }
+  },
+  "tags": []
+}

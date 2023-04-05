@@ -1,0 +1,23 @@
+{
+  "name": "@acquary/cli",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "description": "@Acquary/cli is a tool to use @Acquary/core from the command line",
+  "bin": {
+    "acquary": "./src/bin/cli.js"
+  },
+  "author": {
+    "name": "Douglas Sousa",
+    "email": "douglass.sousa@outlook.com.br"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dodevs/Acquary"
+  }
+}

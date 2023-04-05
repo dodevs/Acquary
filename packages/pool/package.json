@@ -1,0 +1,20 @@
+{
+  "name": "@acquary/pool",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "description": "@Acquary/pool is the pool manager for @Acquary/core",
+  "author": {
+    "name": "Douglas Sousa",
+    "email": "douglass.sousa@outlook.com.br"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dodevs/Acquary"
+  }
+}
