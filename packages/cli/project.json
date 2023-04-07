@@ -18,7 +18,6 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "packages/cli",
-        "envFile": "packages/cli/.env",
         "command": "node --inspect-brk --loader ts-node/esm -r tsconfig-paths/register src/bin/cli.ts"
       }
     },
