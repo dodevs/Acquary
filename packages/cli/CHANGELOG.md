@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/dodevs/Acquary/compare/cli-v1.0.1...cli-v1.0.2) (2023-04-07)
+
+
+### Bug Fixes
+
+* **cli:** import of script file ([0eb12e4](https://github.com/dodevs/Acquary/commit/0eb12e4eb76357ca2e34d24fb75d0ea85aa3da74)), closes [#1](https://github.com/dodevs/Acquary/issues/1)
+
 ## [1.0.1](https://github.com/dodevs/Acquary/compare/cli-v1.0.0...cli-v1.0.1) (2023-04-05)
 
 
