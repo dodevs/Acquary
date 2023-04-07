@@ -62,7 +62,7 @@ acquary execute --env prod --clients clients.json --query "SELECT * FROM SomeTab
 `--q, --query` - The SQL Query to execute\
 `--f, --file` - The SQL File to execute\
 `--s, --script` - The javascript file to execute. [See more](#Script)\
-`--o, --output` - The output file. Can be `json`, `xls` or `stdout`. [See more](#Stdout)
+`--o, --output` - The output format. Can be `json`, `xls` or `stdout`. [See more](#Stdout)\
 `--empty` - If the output should contain empty results\
 `--unique` - If the _xls_ output should contain only one sheet with all the results\
 `--mc, --maxConcurrent` - Max concurrent clients\
@@ -74,7 +74,7 @@ You can also execute a javascript file that contains a function that will be exe
 
 ```javascript
 exports.default = async function(request, client) {
-    const result = await client.query("SELECT * FROM SomeTable");
+    const result = await request.query("SELECT * FROM SomeTable");
     return result.recordset;
 }
 ```
