@@ -72,10 +72,10 @@ export const ExecuteCommand = () => {
 
       if (script) {
         const currentPath = process.cwd();
-        const isDev = process.env['NX_CLI_ENV'] === 'development';
-        const importPath = path.join(isDev ? '' : 'file://', currentPath, script);
+        const isBundle = process.env['NX_TARGET'] === 'bundle';
+        const importPath = path.join(isBundle ? 'file://' : '', currentPath, script);
         const { default: scriptModule } = await import(importPath);
-        scriptFunction = isDev ? scriptModule : scriptModule.default;
+        scriptFunction = isBundle ? scriptModule.default : scriptModule;
       }
 
       Output.format = options.output;
