@@ -1,6 +1,6 @@
 {
   "name": "@acquary/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "commonjs",
   "description": "@acquary/cli is a tool to use @acquary/core from the command line",
   "private": false,
