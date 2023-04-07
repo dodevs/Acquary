@@ -8,9 +8,9 @@ import { GenerateCommand } from "../lib/generate/command";
 const program = new Command();
 
 program
-  .name('Aexe CLI')
+  .name('Acquary CLI')
   .description('CLI to manage and execute scripts in azure databases')
-  .version('1.0.0');
+  .version('^1');
 
 program.addCommand(ExecuteCommand());
 program.addCommand(ConfigureCommand());
