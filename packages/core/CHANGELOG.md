@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/dodevs/Acquary/compare/core-v2.0.0...core-v2.0.1) (2023-04-14)
+
+
+### Bug Fixes
+
+* removed shared types ([fc3018c](https://github.com/dodevs/Acquary/commit/fc3018cbb5dd93830feb5533afe534768c3f142b))
+
 # [2.0.0](https://github.com/dodevs/Acquary/compare/core-v1.0.0...core-v2.0.0) (2023-04-14)
 
 
