@@ -4,13 +4,7 @@ import { err, Result, ResultAsync } from 'neverthrow';
 import Acquary, { ErrorTypeEnum, ExecutionError, ExecutionScript } from '@acquary/core';
 import { CreatePool } from '@acquary/pool';
 import { Output } from '../utils/output';
-
-export interface ClientsConfig {
-  type: 'list' | 'query';
-  list?: string[];
-  query?: string;
-  database?: string;
-}
+import { ClientsConfig } from 'shared/types';
 
 export interface ExecuteParams {
   env: string;

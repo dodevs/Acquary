@@ -1,20 +1,12 @@
 import { homedir } from 'os';
-import { existsSync, mkdirSync, rmdirSync, unlinkSync } from 'fs'
-import * as path from "path";
-import {NodeAuthOptions} from "@azure/msal-node";
-import { err, errAsync, ok, Result, ResultAsync } from "neverthrow";
-import { SQL, CreatePool } from '@acquary/pool';
-import {loadJson, saveJson} from "./json";
-import {GetToken} from "./azure";
-
-interface AcquaryConfig {
-  envs: string[];
-}
-
-interface AcquaryEnv {
-  azure_server: SQL.config,
-  azure_auth: NodeAuthOptions
-}
+import { mkdirSync, rmdirSync, unlinkSync } from 'fs';
+import * as path from 'path';
+import { err, errAsync, ok, Result, ResultAsync } from 'neverthrow';
+import { CreatePool } from '@acquary/pool';
+import { loadJson, saveJson } from './json';
+import { GetToken } from './azure';
+import { AcquaryConfig, AcquaryEnv } from '../model';
+import { safeExistsSync, safeMkdirSync } from './safe-wrappers';
 
 const configPath = path.join(homedir(), '.acquary');
 const configFilePath = path.join(configPath, 'config.json');
@@ -34,19 +26,25 @@ const setTokenIfNecessary = (config: AcquaryEnv, env: string) => new Promise<Acq
 });
 
 export function configureIfNotExists(): Result<void, Error> {
-  if(!existsSync(configPath)) {
-    mkdirSync(configPath);
-    return saveJson(configFilePath, {envs: []});
-  }
-  return ok(undefined);
+  return safeExistsSync(configPath)
+    .andThen(exists => {
+      if (exists) {
+        return ok(undefined);
+      }
+      return safeMkdirSync(configPath)
+        .andThen(() => saveJson(configFilePath, { envs: [] }));
+    });
 }
 
 export function checkIfEnvExists(env: string): Result<boolean, Error> {
 
-  if(!existsSync(configFilePath)) {
+  const exists = safeExistsSync(configFilePath);
+  if (exists.isErr()) {
+    return exists;
+  }
+  if(exists.isOk() && !exists.value) {
     return ok(false);
   }
-
 
   const envsResult = loadJson<AcquaryConfig>(configFilePath).map(config => config.envs);
   if(envsResult.isErr()) {

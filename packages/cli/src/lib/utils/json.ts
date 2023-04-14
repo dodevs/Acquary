@@ -1,15 +1,17 @@
 import * as fs from 'fs';
 import { Result } from 'neverthrow';
+import { safeReadFileSync } from './safe-wrappers';
 
 export type KeyValue<T> = {[key: string]: T};
 
 export function loadJson<T = KeyValue<unknown>>(filePath: string): Result<T, Error> {
-  const safeReadFileSync = Result.fromThrowable(
-    fs.readFileSync,
-    e => new Error(`Error reading file ${filePath}: ${e}`)
+  const safeParseJson = Result.fromThrowable(
+    JSON.parse,
+    e => new Error(`Error parsing JSON from file ${filePath}: ${e}`)
   );
-  return safeReadFileSync(filePath, "utf8")
-    .map(json => Object.assign({}, JSON.parse(json as string)));
+  return safeReadFileSync(filePath)
+    .andThen(json => safeParseJson(json as string))
+    .map(json => Object.assign({}, json));
 }
 
 export function loadJsonAsync<T = KeyValue<unknown>>(filePath: string): Promise<T> {

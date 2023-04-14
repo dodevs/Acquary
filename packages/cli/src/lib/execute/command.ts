@@ -7,6 +7,10 @@ import * as process from 'process';
 import * as path from 'path';
 import { loadJson } from '../utils/json';
 import { ExecutionScript } from '@acquary/core';
+import { ClientsConfig } from 'shared/types';
+import { AcquaryEnv, AcquaryRcOptions, CliOptions } from '../model';
+import { safeExistsSync, safeReadFileSync } from '../utils/safe-wrappers';
+import { ok } from 'neverthrow';
 
 export const ExecuteCommand = () => {
   const command = new Command();
@@ -67,7 +71,12 @@ export const ExecuteCommand = () => {
       }
 
       if (file) {
-        query = readFileSync(file, 'utf-8');
+        const _file = safeReadFileSync(file);
+        if (_file.isErr()) {
+          console.error(_file.error);
+          process.exit(1);
+        }
+        query = _file.value as string;
       }
 
       if (script) {
