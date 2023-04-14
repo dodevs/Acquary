@@ -1,8 +1,7 @@
 import { Command, Option } from 'commander';
-import { readFileSync } from 'fs';
 import { Output } from '../utils/output';
-import { ClientsConfig, execute } from './execute';
-import { checkIfEnvExists } from '../utils/env';
+import { execute } from './execute';
+import { checkIfEnvExists, getEnvAndSetToken } from '../utils/env';
 import * as process from 'process';
 import * as path from 'path';
 import { loadJson } from '../utils/json';
@@ -18,7 +17,7 @@ export const ExecuteCommand = () => {
     .name('execute')
     .description('Execute a script or query')
     .requiredOption('--e, --env <env>', 'Environment to run')
-    .requiredOption('--c, --clients <clients>', 'Clients file config')
+    .option('--c, --clients <clients>', 'Clients file config')
     .addOption(
       new Option('--q, --query <query>', 'SQL Query to execute')
         .conflicts(['script', 'file'])
@@ -34,29 +33,63 @@ export const ExecuteCommand = () => {
     .addOption(
       new Option('--o, --output <output>', 'Output format of exported data')
         .choices(['json', 'xls', 'stdout'])
-        .default('json')
     )
-    .option('--empty', 'Include empty results', false)
-    .option('--unique', 'All results in one sheet', true)
+    .option('--empty', 'Include empty results')
+    .option('--unique', 'All results in one sheet')
     .addOption(
       new Option('--mc, --maxConcurrent <maxConcurrent>', 'Max concurrent clients')
-        .default(Infinity)
     )
     .addOption(
       new Option('--mr, --maxRetries <maxRetries>', 'Max retries after error')
-        .default(0)
     )
-    .action(async options => {
-      const {
-        script, file, clients, env, maxConcurrent, maxRetries
+    .action(async (options: CliOptions) => {
+      let {
+        env,
+        script,
+        query,
+        file,
+        clients,
+        output,
+        empty,
+        unique,
+        maxConcurrent,
+        maxRetries
       } = options;
-      let query = options.query;
+
       let scriptFunction: ExecutionScript | undefined;
       let clientsConfig: ClientsConfig | undefined;
 
-      if (!checkIfEnvExists(env)) {
-        console.error('Environment not found. Please, run "acquary configure --add <env>" to create a new environment.');
+      const envExists = checkIfEnvExists(env);
+      if (envExists.isErr()) {
+        console.error(envExists.error);
         process.exit(1);
+      }
+      if (envExists.isOk() && !envExists.value) {
+        console.warn('Environment not found. Please, run "acquary configure --add <env>" to create a new environment.');
+        process.exit(1);
+      }
+
+      let envConfig!: AcquaryEnv;
+      const config = await getEnvAndSetToken(env);
+      if (config.isErr()) {
+        console.error(config.error);
+        process.exit(1);
+      } else {
+        envConfig = config.value;
+      }
+
+      let envRc!: AcquaryRcOptions[string];
+      const rc = safeExistsSync('.acquaryrc')
+        .andThen(exists => exists
+          ? loadJson<AcquaryRcOptions>('.acquaryrc')
+          : ok(undefined)
+        );
+      if (rc.isErr()) {
+        console.error(rc.error);
+        process.exit(1);
+      }
+      if (rc.isOk() && rc.value) {
+        envRc = rc.value[env];
       }
 
       if (clients) {
@@ -68,8 +101,17 @@ export const ExecuteCommand = () => {
               process.exit(1);
             }
           );
+      } else {
+        if (envRc?.clients) {
+          clientsConfig = envRc.clients;
+        }
+
+        if (envConfig && envConfig.clients) {
+          clientsConfig = envConfig.clients;
+        }
       }
 
+      file = file ?? envRc?.file;
       if (file) {
         const _file = safeReadFileSync(file);
         if (_file.isErr()) {
@@ -79,6 +121,7 @@ export const ExecuteCommand = () => {
         query = _file.value as string;
       }
 
+      script = script ?? envRc?.script;
       if (script) {
         const currentPath = process.cwd();
         const isBundle = process.env['NX_TARGET'] === 'bundle';
@@ -87,9 +130,12 @@ export const ExecuteCommand = () => {
         scriptFunction = isBundle ? scriptModule.default : scriptModule;
       }
 
-      Output.format = options.output;
-      Output.empty = options.empty;
-      Output.unique = options.unique;
+      Output.format = output ?? envRc?.output ?? 'json';
+      Output.empty = empty ?? envRc?.empty ?? false;
+      Output.unique = unique ?? envRc?.unique ?? true;
+
+      maxConcurrent = maxConcurrent ?? envRc?.maxConcurrent ?? Infinity;
+      maxRetries = maxRetries ?? envRc?.maxRetries ?? 0;
 
       const result = await execute({
         env, script: scriptFunction, query, clients: clientsConfig, maxConcurrent, maxRetries

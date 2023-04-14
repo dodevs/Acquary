@@ -124,7 +124,12 @@ export function addEnv(env: string): Result<void, Error> {
       clientId: "a94f9c62-97fe-4d19-b06d-472bed8d2bcf",
       clientSecret: "0f9fd424-9f0e-42ab-b080-b9fddbbae217",
       authority: `https://login.microsoftonline.com/your-tenant-id`,
-    }
+    },
+    clients: {
+      type: "query",
+      database: "<clients_database>",
+      query: "select [Name] from <clients]-table>"
+     }
   } as AcquaryEnv
 
   return saveJson(path.join(getEnvDir(env), 'config.json'), defaultEnv);
