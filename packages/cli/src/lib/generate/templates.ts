@@ -1,4 +1,4 @@
-export const TypesList = ['script', 'clients'] as const;
+export const TypesList = ['script', 'clients', 'postprocess'] as const;
 export type Types = typeof TypesList[number];
 
 const ScriptTemplate = `
@@ -24,11 +24,29 @@ const ClientsTemplate = `
   }
 `;
 
+const PostprocessTemplate = `
+  import sys
+  import json
+
+  qtdTotal = 0
+
+  for client in sys.stdin:
+      result = json.loads(client)
+      qtd = result[0]['Qtd']
+      qtdTotal += qtd
+      print(f'Qtd : {qtd}')
+
+
+  print(f'Qtd total : {qtdTotal}')
+  print("Exit")
+`;
+
 type Template = {
   [key in Types]: string;
 }
 
 export const Templates: Template = {
   'script': ScriptTemplate,
-  'clients': ClientsTemplate
+  'clients': ClientsTemplate,
+  'postprocess': PostprocessTemplate
 }
