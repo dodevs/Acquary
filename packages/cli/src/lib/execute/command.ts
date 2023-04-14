@@ -6,8 +6,7 @@ import * as process from 'process';
 import * as path from 'path';
 import { loadJson } from '../utils/json';
 import { ExecutionScript } from '@acquary/core';
-import { ClientsConfig } from 'shared/types';
-import { AcquaryEnv, AcquaryRcOptions, CliOptions } from '../model';
+import { AcquaryEnv, AcquaryRcOptions, ClientsConfig, CliOptions } from '../model';
 import { safeExistsSync, safeReadFileSync } from '../utils/safe-wrappers';
 import { ok } from 'neverthrow';
 

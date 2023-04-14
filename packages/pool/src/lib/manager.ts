@@ -1,8 +1,7 @@
 import { config, ConnectionPool } from 'mssql';
 import { err, ok, Result, ResultAsync } from 'neverthrow';
-import { KeyValue } from 'shared/types';
 
-const POOL: KeyValue<Promise<ConnectionPool>> = {};
+const POOL: Record<string, Promise<ConnectionPool>> = {};
 
 export function Get(name: string, config: config): Result<Promise<ConnectionPool>, Error> {
   if (!POOL[name]) {

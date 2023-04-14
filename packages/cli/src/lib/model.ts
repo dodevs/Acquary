@@ -1,6 +1,12 @@
-import { ClientsConfig } from "../../../../shared/types";
 import { NodeAuthOptions } from '@azure/msal-node';
 import { SQL } from "@acquary/pool";
+
+export interface ClientsConfig {
+  type: 'list' | 'query';
+  list?: string[];
+  query?: string;
+  database?: string;
+}
 
 export interface AcquaryConfig {
   envs: string[];

@@ -4,7 +4,7 @@ import { err, Result, ResultAsync } from 'neverthrow';
 import Acquary, { ErrorTypeEnum, ExecutionError, ExecutionScript } from '@acquary/core';
 import { CreatePool } from '@acquary/pool';
 import { Output } from '../utils/output';
-import { ClientsConfig } from 'shared/types';
+import { ClientsConfig } from '../model';
 
 export interface ExecuteParams {
   env: string;
