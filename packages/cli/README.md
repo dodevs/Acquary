@@ -12,7 +12,7 @@ npm install -g @acquary/cli
 
 ### ENV
 
-First, you need to configure an _ENV_, that is a folder with a `config.json` file for azure databases server and
+First, you need to configure an _ENV_, that is a folder with a `config.json` file for azure databases config and
 a `.cache.json` file for caching MFA tokens.
 
 You can configure multiple ENVs, and switch between them using the `--env` flag.
@@ -22,8 +22,9 @@ acquary configure --add prod
 ```
 
 This will create a `prod` folder in the `<HOME>/.acquary` folder, and you should edit the `config.json` file to add your configuration.\
-For `azure_server` section, see more information [here](https://tediousjs.github.io/tedious/api-connection.html).\
-For `azure_authentication`, you only need to edit the `authority`. The `clientId` and `clientSecret` are from Azure Data Studio hehe.
+For `server` section, see more information [here](https://tediousjs.github.io/tedious/api-connection.html).\
+For `authentication`, you only need to edit the `authority`. The `clientId` and `clientSecret` are from Azure Data Studio hehe.\
+For `clients`, you can define a query or a list of databases.
 
 #### Parameters
 
@@ -46,7 +47,7 @@ acquary generate clients clients.json
 ```bash
 acquary generate <type> <file>
 ```
-Where `type` can be `clients`or `script`
+Where `type` can be `clients`, `script` or `postprocess`
 
 ### Execute
 
@@ -73,7 +74,8 @@ acquary execute --env prod --clients clients.json --query "SELECT * FROM SomeTab
 You can also execute a javascript file that contains a function that will be executed against all the databases. [See more](https://github.com/tediousjs/node-mssql#request)
 
 ```javascript
-exports.default = async function(request, client) {
+exports.default = async function(transaction, client) {
+    const request = new Request(transaction);
     const result = await request.query("SELECT * FROM SomeTable");
     return result.recordset;
 }
@@ -85,15 +87,7 @@ With the `--output stdout` flag, you can pipe all databases outputs to another c
 For example, you can pipe the output to `jq` to filter the result.
 
 ```bash
-acquary execute --env prod --clients clients.json --query "SELECT * FROM SomeTable" --output stdout | jq '.[] | select(.SomeColumn == "SomeValue")'
+acquary execute --env prod --clients clients.json --query "SELECT COUNT(*) AS Qtd FROM SomeTable" --output stdout | jq '.[] | select(.Qtd > 10)'
 ```
 
-Or to `python`
-
-```python
-import sys
-import json
-
-for line in sys.stdin:
-    print(json.loads(line))
-```
+Or to `postprocess` generated python script.
