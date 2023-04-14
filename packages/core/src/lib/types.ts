@@ -1,4 +1,4 @@
-import { Request } from 'mssql';
+import { Transaction } from 'mssql';
 
 export enum ErrorTypeEnum {
   client,
@@ -17,7 +17,7 @@ export type ExecutionError = {
 }
 
 export type ExecutionScript<T =
-  unknown[]> = (request: Request, client: string) => Promise<T>;
+  unknown[]> = (transaction: Transaction, client: string) => Promise<T>;
 
 export type Execution = {
   clients: string[];

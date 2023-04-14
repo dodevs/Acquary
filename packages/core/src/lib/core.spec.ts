@@ -44,7 +44,7 @@ vitest.mock('mssql', () => ({
 
 const CLIENTS = ['client1', 'client2'];
 
-const script: ExecutionScript = async (request, client) => {
+const script: ExecutionScript = async (transaction, client) => {
   return [{client}]
 }
 
@@ -66,7 +66,7 @@ describe('Acquary', () => {
     await acquary.execute({
       clients: CLIENTS, query: 'select 1', callback: (result) => {
         const { client, data } = result;
-        expect(data).toEqual([{ client }]);
+        expect(data).toEqual([0]);
       }
     })
   });

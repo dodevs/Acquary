@@ -13,7 +13,7 @@ function runScript(connection: ConnectionPool, script: ExecutionScript, client: 
 
   const asyncExecute = async () => {
     await transaction.begin();
-    const result = await script(new Request(transaction), client);
+    const result = await script(transaction, client);
     await transaction.commit();
     return result;
   }
@@ -46,7 +46,8 @@ export default function(pool: Pool, maxRetries: number = 1) {
             error: checked.error as Error
           }]);
         }
-        executor = async (request) => {
+        executor = async (transaction) => {
+          const request = new Request(transaction);
           const result = await request.query(<string>options.query);
           return result.recordset;
         }
