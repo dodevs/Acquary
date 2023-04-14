@@ -1,3 +1,30 @@
+# [2.0.0](https://github.com/dodevs/Acquary/compare/cli-v1.0.3...cli-v2.0.0) (2023-04-14)
+
+
+### Bug Fixes
+
+* **cli:** generate correct script ([8ecd163](https://github.com/dodevs/Acquary/commit/8ecd1630397c8ec2bbbbd5f0d37497d39a0f699f))
+* removed shared types ([fc3018c](https://github.com/dodevs/Acquary/commit/fc3018cbb5dd93830feb5533afe534768c3f142b))
+
+
+### Code Refactoring
+
+* **cli:** renamed env config properties ([c3d3ba1](https://github.com/dodevs/Acquary/commit/c3d3ba18862a5e00171b3148eb8a6a8b0815912e))
+* **core:** pass Transaction to script instead of Request ([a4fb4d1](https://github.com/dodevs/Acquary/commit/a4fb4d1bc83b7492b4095daf9686f096a0d8db47))
+
+
+### Features
+
+* **cli:** add python post process script generator ([2bfd9c6](https://github.com/dodevs/Acquary/commit/2bfd9c67cd825128ab9f2d3a9a0b864da958360f))
+* **cli:** load default clients config from env; load cli params from .acquaryrc file ([85847a3](https://github.com/dodevs/Acquary/commit/85847a31835c7a93b6e0345441a6e424f8eb3be3))
+* **cli:** safe filesystem methods; models ([be47fb6](https://github.com/dodevs/Acquary/commit/be47fb6435ec168512fe7f857a31d8401fcc9542))
+
+
+### BREAKING CHANGES
+
+* **cli:** Existing configs should be renamed
+* **core:** Existing scripts no longer work. You need to change them
+
 ## [1.0.3](https://github.com/dodevs/Acquary/compare/cli-v1.0.2...cli-v1.0.3) (2023-04-07)
 
 
