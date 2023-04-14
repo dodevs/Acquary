@@ -39,7 +39,7 @@ export async function execute(params: ExecuteParams): Promise<Result<void, Execu
     } as ExecutionError])
   }
 
-  const pool = CreatePool(config.value.azure_server);
+  const pool = CreatePool(config.value.server);
   let databases: string[] = [];
 
   if(params.clients?.type === 'list' && params.clients?.list) {

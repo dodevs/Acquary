@@ -12,12 +12,12 @@ const configPath = path.join(homedir(), '.acquary');
 const configFilePath = path.join(configPath, 'config.json');
 
 const setTokenIfNecessary = (config: AcquaryEnv, env: string) => new Promise<AcquaryEnv>((resolve, reject) => {
-  if (config.azure_server.authentication?.type === 'azure-active-directory-access-token') {
-    GetToken(config?.azure_auth, env).then(token => {
+  if (config.server.authentication?.type === 'azure-active-directory-access-token') {
+    GetToken(config?.auth, env).then(token => {
       if (!token) {
         reject(new Error('Unable to get access token.'));
       }
-      config.azure_server.authentication!.options.token = token;
+      config.server.authentication!.options.token = token;
       resolve(config);
     });
   } else {
@@ -105,7 +105,7 @@ export function addEnv(env: string): Result<void, Error> {
   }
 
   const defaultEnv = {
-    azure_server: {
+    server: {
       server: 'your server url',
       options: {
         encrypt: true,
@@ -120,7 +120,7 @@ export function addEnv(env: string): Result<void, Error> {
       },
       requestTimeout: 300000,
     },
-    azure_auth: {
+    auth: {
       clientId: "a94f9c62-97fe-4d19-b06d-472bed8d2bcf",
       clientSecret: "0f9fd424-9f0e-42ab-b080-b9fddbbae217",
       authority: `https://login.microsoftonline.com/your-tenant-id`,
@@ -168,7 +168,7 @@ export function testEnv(env: string): ResultAsync<void, Error> {
   }
 
   return getEnvAndSetToken(env).andThen(config => {
-    const pool = CreatePool(config.azure_server);
+    const pool = CreatePool(config.server);
     return pool.connect({database: 'master'}).map(conn => {
       return conn.close();
     });
@@ -180,8 +180,8 @@ export function loggoutEnv(env: string): Result<undefined, Error> {
   if (envConfig.isErr()) {
     return err(envConfig.error);
   }
-  if (envConfig.value.azure_server.authentication?.type === 'azure-active-directory-access-token') {
-    envConfig.value.azure_server.authentication.options.token = '';
+  if (envConfig.value.server.authentication?.type === 'azure-active-directory-access-token') {
+    envConfig.value.server.authentication.options.token = '';
     const saveResult = saveJson(path.join(getEnvDir(env), 'config.json'), envConfig);
     if(saveResult.isErr()) {
       return err(saveResult.error);
