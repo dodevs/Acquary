@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/dodevs/Acquary/compare/pool-v1.1.0...pool-v1.1.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* add dependencies to packages. json ([31dfc99](https://github.com/dodevs/Acquary/commit/31dfc99458dce06a833ac774d1669d940574235f))
+* removed comma ([5ea1df1](https://github.com/dodevs/Acquary/commit/5ea1df141203416f2914d2126ad3f354c510173c))
+
 # [1.1.0](https://github.com/dodevs/Acquary/compare/pool-v1.0.1...pool-v1.1.0) (2024-01-19)
 
 
