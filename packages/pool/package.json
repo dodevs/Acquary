@@ -20,6 +20,7 @@
   },
   "peerDependencies": {
     "mssql": "^10.0.2",
-    "neverthrow": "^6.1.0"
+    "neverthrow": "^6.1.0",
+    "@swc/helpers": "~0.5.3"
   }
 }
