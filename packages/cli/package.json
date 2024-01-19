@@ -20,5 +20,16 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/dodevs/Acquary"
+  },
+  "peerDependencies": {
+    "@acquary/core": "latest",
+    "@acquary/pool": "latest",
+    "cli-progress": "^3.12.0",
+    "commander": "^11.1.0",
+    "@azure/msal-node": "^2.6.1",
+    "neverthrow": "^6.1.0",
+    "node-sql-parser": "^4.17.0",
+    "opener": "^1.5.2",
+    "xlsx": "^0.18.5"
   }
 }
