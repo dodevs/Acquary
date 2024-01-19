@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/dodevs/Acquary/compare/cli-v2.0.0...cli-v2.1.0) (2024-01-19)
+
+
+### Features
+
+* update dependencies ([193927d](https://github.com/dodevs/Acquary/commit/193927d22fc3b12f82f5a2bd09206f9f7264a756))
+
 # [2.0.0](https://github.com/dodevs/Acquary/compare/cli-v1.0.3...cli-v2.0.0) (2023-04-14)
 
 
