@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/dodevs/Acquary/compare/core-v2.1.2...core-v2.1.3) (2024-01-19)
+
+
+### Bug Fixes
+
+* missing swc helper dependencie ([40af33e](https://github.com/dodevs/Acquary/commit/40af33e628df7975adb3ffc13de1b9c8e2304992))
+
 ## [2.1.2](https://github.com/dodevs/Acquary/compare/core-v2.1.1...core-v2.1.2) (2024-01-19)
 
 
