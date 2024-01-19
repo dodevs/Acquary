@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/dodevs/Acquary/compare/core-v2.1.1...core-v2.1.2) (2024-01-19)
+
+
+### Bug Fixes
+
+* removed comma ([5ea1df1](https://github.com/dodevs/Acquary/commit/5ea1df141203416f2914d2126ad3f354c510173c))
+
 ## [2.1.1](https://github.com/dodevs/Acquary/compare/core-v2.1.0...core-v2.1.1) (2024-01-19)
 
 
