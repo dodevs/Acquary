@@ -1,3 +1,11 @@
+## [2.2.1](https://github.com/dodevs/Acquary/compare/cli-v2.2.0...cli-v2.2.1) (2024-05-21)
+
+
+### Bug Fixes
+
+* cache file name ([eead14d](https://github.com/dodevs/Acquary/commit/eead14d4a6b966518cd80a137479373bed9f278d))
+* save correct value ([85e12a9](https://github.com/dodevs/Acquary/commit/85e12a9c79b8d315c2a62cfdbe31f4982457bfa0))
+
 # [2.2.0](https://github.com/dodevs/Acquary/compare/cli-v2.1.3...cli-v2.2.0) (2024-05-21)
 
 
