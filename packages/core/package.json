@@ -1,6 +1,6 @@
 {
   "name": "@acquary/core",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "type": "commonjs",
   "description": "@acquary/core is a lib for execute a query on multiple Azure Databases",
   "private": false,
