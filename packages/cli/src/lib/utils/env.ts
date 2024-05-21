@@ -187,7 +187,7 @@ export function loggoutEnv(env: string): Result<undefined, Error> {
   }
   if (envConfig.value.server.authentication?.type === 'azure-active-directory-access-token') {
     envConfig.value.server.authentication.options.token = '';
-    const saveResult = saveJson(path.join(getEnvDir(env), 'config.json'), envConfig);
+    const saveResult = saveJson(path.join(getEnvDir(env), 'config.json'), envConfig.value);
     if(saveResult.isErr()) {
       return err(saveResult.error);
     }
