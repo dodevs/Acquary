@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/dodevs/Acquary/compare/pool-v1.1.2...pool-v1.2.0) (2024-05-21)
+
+
+### Features
+
+* update all dependencies ([49fe83d](https://github.com/dodevs/Acquary/commit/49fe83d9838c1b19d224c05aa4812ffca2be5989))
+
 ## [1.1.2](https://github.com/dodevs/Acquary/compare/pool-v1.1.1...pool-v1.1.2) (2024-01-19)
 
 
