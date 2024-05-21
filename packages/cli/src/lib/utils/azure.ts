@@ -12,7 +12,7 @@ import {getEnvDir} from "./env";
 import * as path from "path";
 
 const cacheAccess = (env: string) => {
-  const cacheFilePath = path.join(getEnvDir(env), '.cache.json');
+  const cacheFilePath = path.join(getEnvDir(env), 'cache.json');
 
   const before = async (cacheContext: TokenCacheContext) => {
     try {

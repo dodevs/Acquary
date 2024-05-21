@@ -13,7 +13,7 @@ npm install -g @acquary/cli
 ### ENV
 
 First, you need to configure an _ENV_, that is a folder with a `config.json` file for azure databases config and
-a `.cache.json` file for caching MFA tokens.
+a `cache.json` file for caching MFA tokens.
 
 You can configure multiple ENVs, and switch between them using the `--env` flag.
 
