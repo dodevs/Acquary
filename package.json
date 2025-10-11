@@ -13,7 +13,7 @@
     "commander": "^12.1.0",
     "mssql": "^10.0.2",
     "neverthrow": "^6.2.1",
-    "node-sql-parser": "^5.1.0",
+    "node-sql-parser": "^5.3.12",
     "opener": "^1.5.2",
     "tslib": "^2.6.2",
     "xlsx": "^0.18.5"
