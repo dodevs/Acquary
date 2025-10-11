@@ -15,7 +15,7 @@
     "neverthrow": "^6.2.1",
     "node-sql-parser": "^5.1.0",
     "opener": "^1.5.2",
-    "tslib": "^2.6.2",
+    "tslib": "^2.8.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
